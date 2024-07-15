@@ -1,5 +1,11 @@
 <script setup>
+import { ref } from 'vue'
 import upload from "./components/upload.vue"
+const activeName = ref('img')
+
+const onChange = (e) =>{
+  console.log(e)
+}
 </script>
 
 <template>
@@ -11,7 +17,15 @@ import upload from "./components/upload.vue"
       <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
   </div>
-  <upload />
+  <!-- 文件上传 -->
+  <el-tabs v-model="activeName" class="demo-tabs" @tab-click="handleClick">
+    <el-tab-pane label="图片上传" name="img">
+      <upload :type="activeName" @onChange="onChange" />
+    </el-tab-pane>
+    <el-tab-pane label="文件上传" name="file">
+      <upload :type="activeName" @onChange="onChange" />
+    </el-tab-pane>
+  </el-tabs>
 </template>
 
 <style scoped>
